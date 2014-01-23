@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+<title>Session Storage Events Demo</title>
+
+<script>
+
+function storeItem() {
+    var itemName = document.getElementById("itemName").value;
+	var itemValue = document.getElementById("itemValue").value;
+
+	window.sessionStorage.setItem(itemName, itemValue);
+	displayItems();
+}
+
+function removeItem() {
+    var itemName = document.getElementById("itemName").value;
+
+	window.sessionStorage.removeItem(itemName);
+	displayItems();
+}
+
+function clearItems() {
+	window.sessionStorage.clear();
+	displayItems();
+}
+
+function displayItems() {
+
+	var count = window.sessionStorage.length;
+	var result = "Session storage values:<br/><ul>";
+	
+	for (var i = 0; i < count; i++) {
+		var key = window.sessionStorage.key(i);
+		var val = window.sessionStorage.getItem(key);
+		result += "<li>" + key + "=" + val + "</li>";
+	}
+	result += "</ul>";
+	document.getElementById("messageArea").innerHTML = result;
+}
+
+function onLoad() {
+   document.getElementById("storeItemButton").addEventListener("click", storeItem, true);
+   document.getElementById("removeItemButton").addEventListener("click", removeItem, true);
+   document.getElementById("clearItemsButton").addEventListener("click", clearItems, true);   
+}
+
+window.addEventListener("load", onLoad, true);
+
+</script>
+</head>
+<body>
+
+<iframe src="HandlingEvents.html" style="width:50%; height:550px; background-color:lightblue; float:right"></iframe>
+
+<h1>Session Storage Events Demo</h1>
+
+Item name:  <input type="Text" id="itemName"  size="15"> <br>
+Item value: <input type="Text" id="itemValue" size="15"> <br>
+<br/>
+
+<input type="button" value="Store item" id="storeItemButton" /> &nbsp;
+<input type="button" value="Remove item" id="removeItemButton" /> &nbsp;
+<input type="button" value="Clear items" id="clearItemsButton" /> &nbsp;
+
+<br/><br/>
+<div id="messageArea"></div>
+
+</body>
+</html>

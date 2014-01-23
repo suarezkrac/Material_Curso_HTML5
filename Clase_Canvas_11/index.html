@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      canvas {
+        border: 1px solid #9C9898;
+      }
+    </style>
+    <script src="kinetic-v3.10.4.min.js"></script>
+    <script>
+      window.onload = function() {
+        var stage = new Kinetic.Stage({
+          container: "container",
+          width: 578,
+          height: 200
+        });
+
+        var layer = new Kinetic.Layer();
+
+        var star = new Kinetic.Star({
+          innerRadius: 20,
+          outerRadius: 50,
+          fill: 'yellow',
+          stroke: 'black',
+          strokeWidth: 5,
+          numPoints: 5,
+          x: 60,
+          y: 60,
+          draggable: true,
+          shadow: {
+            offset: 5,
+            color: 'black',
+            blur: 5,
+            opacity: 0.5
+          }
+        });
+
+        layer.add(star);
+        stage.add(layer);
+
+        // convert star node into a cached image
+        star.toImage({
+          // cached image will be 120 x 120
+          width: 120,
+          height: 120,
+          /*
+           * when star has been converted into an image,
+           * use the image to instantiate image objects and
+           * then add them to the layer
+           */
+          callback: function(img) {
+            for(var n = 0; n < 10; n++) {
+              var image = new Kinetic.Image({
+                image: img,
+                x: Math.random() * stage.getWidth(),
+                y: Math.random() * stage.getHeight(),
+                offset: 60,
+                draggable: true
+              });
+
+              layer.add(image);
+            }
+
+            layer.draw();
+          }
+        });
+      };
+
+    </script>
+  </head>
+  <body>
+    <div id="container"></div>
+  </body>
+</html>

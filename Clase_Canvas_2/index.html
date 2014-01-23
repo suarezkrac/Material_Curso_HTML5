@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style type="text/css">
+			canvas{
+				width: 600px;
+				height: 200px;
+				border: 1px solid black;
+				box-shadow: 10px 10px 10px gray;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="miCanvas" width="600" height="200"></canvas>
+		<canvas id="miCanvas_1" width="600" height="200"></canvas>
+		<canvas id="miCanvas_2" width="600" height="200"></canvas>
+		<canvas id="miCanvas_3" width="600" height="200"></canvas>
+		<canvas id="miCanvas_4" width="600" height="200"></canvas>
+		<script type="text/javascript">
+		window.onload = function (){
+			var canvas = document.getElementById("miCanvas");
+			var contexto = canvas.getContext("2d");
+
+			var imagen = new Image();
+			imagen.onload = function(){
+				var fondo = contexto.createPattern(imagen,"repeat");
+
+				contexto.beginPath();
+				contexto.moveTo(170,80);
+				contexto.bezierCurveTo(130, 100, 130, 150, 230, 150);
+		        contexto.bezierCurveTo(250, 180, 320, 180, 340, 150);
+		        contexto.bezierCurveTo(420, 150, 420, 120, 390, 100);
+		        contexto.bezierCurveTo(430, 40, 370, 30, 340, 50);
+		        contexto.bezierCurveTo(320, 5, 250, 20, 250, 50);
+		        contexto.bezierCurveTo(200, 5, 150, 20, 170, 80);
+				contexto.closePath();
+				contexto.lineWidth= 1;
+				contexto.fillStyle = fondo;
+				contexto.fill();
+				contexto.strokeStyle="blue";
+				contexto.stroke();
+			}
+			imagen.src="nube.jpg";
+
+			
+
+			var canvas1 = document.getElementById("miCanvas_1");
+			var contexto1 = canvas1.getContext("2d");
+
+			contexto1.beginPath();
+			contexto1.rect(180,50,200,100);
+			contexto1.lineWidth = 5;
+			
+
+	var gradiente =contexto1.createLinearGradient(200,0,200,200);
+	gradiente.addColorStop(0,"blue");
+	gradiente.addColorStop(1,"red");
+
+			contexto1.fillStyle = gradiente;
+			contexto1.fill();
+			contexto1.strokeStyle = "blue";
+			contexto1.stroke();
+
+
+			var canvas2 = document.getElementById("miCanvas_2");
+			var contexto2 = canvas2.getContext("2d");
+			var centroX = canvas2.width/2;
+			var centroY = canvas2.height/2;
+			var radio = 80;
+
+			contexto2.beginPath();
+			contexto2.arc(centroX, centroY, radio, 0 , 2*Math.PI, false);			
+
+
+	var gradiente1 =contexto2.createRadialGradient(centroX,centroY,10,centroX,centroY,200);
+	gradiente1.addColorStop(0,"orange");
+	gradiente1.addColorStop(1,"red");
+
+			contexto2.lineWidth = 5;
+			contexto2.fillStyle = gradiente1;
+			contexto2.fill();
+			contexto2.strokeStyle = "blue";
+			contexto2.stroke();
+
+			var canvas3 = document.getElementById("miCanvas_3");
+			var contexto3 = canvas3.getContext("2d");
+			var centroX = canvas3.width/2;
+			var centroY = canvas3.height/2;
+			var radio = 80;
+
+			contexto3.beginPath();
+			contexto3.arc(centroX, centroY, radio, 0 , Math.PI, false);	
+			contexto3.closePath();		
+			contexto3.lineWidth = 5;
+			contexto3.fillStyle = "gray";
+			contexto3.fill();
+			contexto3.strokeStyle = "blue";
+			contexto3.stroke();
+
+			var canvas4 = document.getElementById("miCanvas_4");
+			var contexto4 = canvas4.getContext("2d");
+			
+			var imagen2 =  new Image();
+			imagen2.onload = function(){
+
+				var destWith = 400;
+				var destHeight = 180;
+				var destX = canvas4.width/2 - destWith/2;
+				var destY = canvas4.height/2 - destHeight/2;
+
+				//contexto4.drawImage(imagen2,10,10,400,180);
+				contexto4.drawImage(imagen2,10,10,400,180,destX, destY, destWith, destHeight);
+			}
+			imagen2.src="darth-vader.jpg"		
+			
+		}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<style type="text/css">
+
+	</style>
+</head>
+<body>
+	<h3>Load Ajax en Jquery</h3>
+	<ul>
+		<li><a href="php/colores.php?color=azul">Cuentame del Color Azul</a></li>
+		<li><a href="php/colores.php?color=rojo">Cuentame del Color Rojo</a></li>
+		<li><a href="php/colores.php?color=amarillo">Cuentame del Color Amarillo</a></li>
+	</ul>
+	<div id="salida"></div>
+	<h3> GET y POST Ajax en Jquery</h3>
+	<h4>Ingrese un numero para multiplicarlo por 5:</h4>
+	<form id="formularioCalculadora" method="get">
+
+		<input type="text"  id="campoNumero" name="numerovariable">
+		<input type="submit" id="enviar" value="Enviar">
+
+	</form>
+	<div id="resultado"></div>
+	<h3> Metodo Ajax() en Jquery</h3>
+
+	<h4> Ingresa un año y obtiene el año siguiente:</h3>
+	<input type="text" name="ano" id="numeroano">
+	<input type="submit" id="enviar_2" value="Enviar">
+	<div id="resultado_2"></div>
+
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+	function inicioEnvio(){
+		$('#resultado_2').html('<b>Cargando.....</b>');
+	}
+	function llegada(datos){
+		$('#resultado_2').html('<b>'+datos+'</b>');
+	}
+	function problema(){
+		$('#resultado_2').html('<b>Problemas con el servidor</b>');
+	}
+	$(document).ready(function(){
+		$("#enviar_2").click(function(){
+			var x=$('#numeroano').attr("value");
+			$.ajax({
+				async:true,
+				type:"POST",
+				dataType:"html",
+				contentType:"application/x-www-form-urlencoded",
+				url:"php/ano.php",
+				data:"ano_actual="+x,
+				beforeSend:inicioEnvio,
+				success:llegada,
+				timeout: 4000,
+				error:problema
+			});
+			return false;
+
+		})
+
+
+
+
+		$('#enviar').click(function(){
+			var x = $('#campoNumero').attr("value");
+			$.get("php/calculadora.php",{numerovariable: x},function(datos){
+					$('#resultado').html('<p>'+datos+'</p>')
+			})
+			return false;
+		})
+
+
+		$('a').click(function(){
+			var pagina = $(this).attr('href');
+			$('#salida').load(pagina);
+			return false;
+		})
+
+		
+		
+	});
+
+	
+
+</script>
+
+</body>
+
+</html>

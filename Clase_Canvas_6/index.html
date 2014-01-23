@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style type="text/css">
+			body{
+				margin: 0px;
+				padding: 0px;
+			}
+			canvas{
+				border: 1px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container" ></div>
+		<script type="text/javascript" src="kinetic-v3.10.4.min.js"></script>
+		<script type="text/javascript">
+		window.onload = function(){
+			var stage = new Kinetic.Stage({
+				container: "container",
+				width:600,
+				height:200
+			});
+
+			var layer = new Kinetic.Layer();
+
+			var HexagonoAzul = new Kinetic.RegularPolygon({
+				x:100,
+				y: stage.getHeight() / 2,
+				sides: 6,
+				radius: 70,
+				fill: "#0000FF",
+				stroke: "black",
+				strokeWidth: 4,
+				draggable: true
+			});
+
+			var HexagonoAmarillo = new Kinetic.RegularPolygon({
+				x: stage.getWidth() / 2,
+				y: stage.getHeight() / 2,
+				sides: 6,
+				radius: 70,
+				fill: "yellow",
+				stroke: "black",
+				strokeWidth: 4,
+				draggable: true
+			});
+
+			layer.add(HexagonoAmarillo);
+			layer.add(HexagonoAzul);
+			stage.add(layer);
+
+			var periodo = 2000;
+
+			stage.onFrame(function(frame){
+				var escala = Math.sin(frame.time * 2 * Math.PI/periodo)+ 0.001;
+				HexagonoAzul.setScale(escala);
+				HexagonoAmarillo.setScale(1,escala)
+				layer.draw();
+			});
+
+			stage.start();
+
+		}
+		</script>
+	</body>
+</html>

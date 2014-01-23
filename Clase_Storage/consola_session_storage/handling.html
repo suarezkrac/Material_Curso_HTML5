@@ -1,0 +1,45 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+
+</head>
+
+<body>
+	<ul id="eventosLista"/>
+	<script type="text/javascript">
+		var ul = document.getElementById("eventosLista");
+
+		 window.onstorage = handleStorage;
+
+		function handleStorage (e) {
+
+			var mensaje = "";
+
+			if (e.storageArea == window.localStorage) {
+
+				mensaje += "localStorage cambio por la url "+e.url+"<br>" ;
+			}else{
+				mensaje += "sessionStorage cambio por la url "+e.url+"<br>" ;
+			}
+
+			if(e.oldValue == null && e.newValue == null){
+				mensaje += "Limpio todos los valores";
+			} else if(e.oldValue == null){
+				mensaje += "Adiciono "+e.key+" = "+e.newValue;
+			}  else if(e.newValue == null){
+				mensaje += "Borro "+e.key+" = "+e.oldValue;
+			}
+			else{
+				mensaje += "Cambio "+e.key+", valor antiguo = "+e.oldValue+", nuevo valor ="+e.newValue;
+			}
+
+		
+				var li = document.createElement("li");
+				li.innerHTML = message;
+				ul.appendChild(li);
+		}
+	</script>
+</body>
+</html>

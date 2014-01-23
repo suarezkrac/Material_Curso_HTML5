@@ -1,0 +1,39 @@
+@font-face{
+	font-family:"MiFuente";
+	src:url('../fonts/20db-webfont.eot');
+	src:url('../fonts/20db-webfont.eot?iefix') format('embedded-opentype'),
+	url('../fonts/20db-webfont.woff') format('woff'),
+	url('../fonts/20db-webfont.ttf') format('truetype'),
+	url('../fonts/20db-webfont.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+h1{
+	font-family: 'MiFuente',Verdana;
+
+}
+
+#box{
+	width:500px;
+	height:500px;
+	background-color: red;
+	border: 2px solid black;
+}
+#box:hover{
+
+	animation: miprimeraanimacion 5s;
+	-moz-animation: miprimeraanimacion 5s;
+}
+
+
+@keyframes miprimeraanimacion{
+	0%{background-color: red; width:500px;}
+	25%{background-color: blue; width:300px;}
+	50%{background-color: blue; width:300px;}
+	75%{background-color: blue; width:300px;}
+	100%{background-color: green; width:500px;}
+}
+
+
+

@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style type="text/css">
+			canvas{
+				width: 600px;
+				height: 400px;
+				border: 1px solid black;
+				box-shadow: 10px 10px 10px gray;
+			}
+			#miCanvas_temp{ display: none;}
+		</style>
+	</head>
+	<body>
+		<canvas id="miCanvas" width="600" height="300"></canvas>
+		<canvas id="miCanvas_2" width="600" height="200"></canvas>
+		<canvas id="miCanvas_temp" width="600" height="500"></canvas>
+		<canvas id="miCanvas_3" width="600" height="500"></canvas>
+		<script type="text/javascript">
+		function parrafoTexto (contexto, texto, x, y, maxWidth, lineHeigth){
+			var palabras = texto.split(" ");
+			var	linea = "";
+
+			for (var n = 0; n < palabras.length; n++) {
+				var testLinea = linea + palabras[n] + " ";
+				var metricas = contexto.measureText(testLinea);
+				var testAncho = metricas.width;
+				if(testAncho > maxWidth){
+					contexto.fillText(linea, x, y);
+					linea =  palabras[n] + " ";
+					y+=lineHeigth;
+				}else {
+					linea = testLinea;
+				}
+				
+			};
+			contexto.fillText(linea,x,y);
+
+
+		}
+		window.onload = function (){
+			var canvas = document.getElementById("miCanvas");
+			var contexto = canvas.getContext("2d");
+			var maxWidth = 400;
+			var lineHeigth = 25;
+
+			var x= 10;
+
+			var y= 60;
+
+			var texto = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived";
+
+			contexto.font= "16pt Calibri";
+			contexto.fillStyle = "blue";
+
+			parrafoTexto(contexto, texto, x, y, maxWidth, lineHeigth);
+
+			var canvas2 = document.getElementById("miCanvas_2");
+			var contexto2 = canvas2.getContext("2d");
+
+			contexto2.rect(180, 40 , 200, 100);
+			contexto2.fillStyle = "red";
+			contexto2.shadowColor = "black";
+			contexto2.shadowBlur = 20;
+			contexto2.shadowOffsetX = 10;
+			contexto2.shadowOffsetY = 10;
+			contexto2.fill();
+
+			contexto2.globalAlpha = 0.5;
+			contexto2.beginPath();
+			contexto2.arc(320,120,60,0,2*Math.PI,false);
+			contexto2.fillStyle = "blue";
+			contexto2.fill();
+
+			var canvas3 = document.getElementById("miCanvas_3");
+			var contexto3 = canvas3.getContext("2d");
+			var temp_canvas = document.getElementById("miCanvas_temp");
+			var temp_contexto = temp_canvas.getContext("2d");
+
+			var cuadradoAncho = 55;
+			var circuloRadio = 35;
+			var inicioX = 10;
+			var inicioY = 30;
+			var rectCirculoDistX = 50;
+			var rectCirculoDistY = 50;
+
+			var ejemploDistanciaX = 150;
+			var ejemploDistanciaY = 140;
+
+			var atributos = new Array();
+			atributos.push("source-atop");
+			atributos.push("source-in");
+			atributos.push("source-out");
+			atributos.push("source-over");
+			atributos.push("destination-atop");
+			atributos.push("destination-in");
+			atributos.push("destination-out");
+			atributos.push("destination-over");
+			atributos.push("lighter");
+			atributos.push("darker");
+			atributos.push("xor");
+			atributos.push("copy");
+
+			for (var i = 0; i < atributos.length; i++) {
+				var tempX;
+				var tempY;
+
+				var tempOperacion = atributos[i];
+				if(i<4){
+					tempX=inicioX +(i*ejemploDistanciaX);
+					tempY= inicioY;
+				} else if(i<8){
+					tempX=inicioX +((i-4)*ejemploDistanciaX);
+					tempY= inicioY+ejemploDistanciaY;
+				}else {
+					tempX=inicioX +((i-8)*ejemploDistanciaX);
+					tempY= inicioY+(ejemploDistanciaY*2);
+				}
+				temp_contexto.clearRect(0,0,canvas3.width,canvas3.height);
+
+				temp_contexto.beginPath();
+				temp_contexto.rect(tempX, tempY,cuadradoAncho,cuadradoAncho);
+				temp_contexto.fillStyle ="blue";
+				temp_contexto.fill();
+
+				temp_contexto.globalCompositeOperation = tempOperacion;
+
+				temp_contexto.beginPath();
+				temp_contexto.arc(tempX +rectCirculoDistX, tempY +rectCirculoDistY, circuloRadio,0,2*Math.PI,false);
+				temp_contexto.fillStyle ="red";
+				temp_contexto.fill();
+
+				temp_contexto.globalCompositeOperation = "source-over";
+				
+				temp_contexto.font ="10pt Verdana";
+				temp_contexto.fillStyle ="black";
+				temp_contexto.fillText(tempOperacion, tempX, tempY+ cuadradoAncho+45);
+
+				contexto3.drawImage(temp_canvas,0,0);
+			};
+
+
+		}
+		</script>
+	</body>
+</html>

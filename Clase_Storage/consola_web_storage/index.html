@@ -1,0 +1,85 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+
+</head>
+
+<body>
+	<h1>Consola de Almacenamiento en Web Storage</h1>
+	<p>Click en los botones para adicionar elemento al local storage</p>
+
+	<b>Item Nombre:</b><input type="text" id="itemNombre" size="15">
+	<br>
+	<b>Item Valor:</b><input type="text" id="itemValor" size="15">
+	<br>
+
+	<input type="button" value="Guardar item" id="guardar"> &nbsp;
+	<input type="button" value="Contar items" id="contar"> &nbsp;
+	<input type="button" value="Borrar item" id="borrar"> &nbsp;
+	<input type="button" value="Limpiar items" id="limpiar"> &nbsp;
+	<input type="button" value="Mostrar items" id="mostrar"> &nbsp;
+	<br>
+	<br>
+	<div id ="resultados"></div>
+	<script type="text/javascript">
+	function onLoad () {
+		// body...
+		document.getElementById("guardar").addEventListener("click",guardarItem,true);
+		document.getElementById("contar").addEventListener("click",contarItem,true);
+		document.getElementById("borrar").addEventListener("click",borrarItem,true);
+		document.getElementById("limpiar").addEventListener("click",limpiarItem,true);
+		document.getElementById("mostrar").addEventListener("click",mostrarItem,true);
+
+		adicionarValoresDefecto();
+	}
+
+	window.addEventListener("load", onLoad, true);
+
+	function guardarItem () {
+		var itemNombre = document.getElementById("itemNombre").value;
+		var itemValor = document.getElementById("itemValor").value;
+
+		window.localStorage.setItem(itemNombre,itemValor);
+		//window.localStorage[itemNombre] = itemValor;
+
+		alert("Guardado correcto en local storage: Key :"+itemNombre+" -Valor : "+itemValor);
+	}
+
+	function adicionarValoresDefecto () {
+		window.localStorage.setItem("Nombre", "Giovanny Suarez");
+		window.localStorage[Hora] = "12pm";
+	}
+
+	function contarItem () {
+		var count = window.localStorage.length;
+		alert("Hay  :"+count+" items en el localStorage");
+		// body...
+	}
+	function borrarItem () {
+		var itemName = document.getElementById("itemNombre").value;
+		window.localStorage.removeItem(itemName);
+		alert("Borrado Exitoso");
+		// body...
+	}
+	function limpiarItem () {
+		// body...
+		window.localStorage.clear();
+		alert("localStorage Limpio");
+	}
+	function mostrarItem () {
+		var count = window.localStorage.length;
+		var resultado = "Valores del localStorage:<br><ul>";
+
+		for (var i = 0; i < count; i++) {
+			var key = window.localStorage.key(i);
+			var val = window.localStorage.getItem(key);
+			resultado += "<li>"+key+" = "+val+"</li>";
+		}
+		resultado+="</ul>";
+		document.getElementById("resultados").innerHTML = resultado;
+	}
+	</script>
+</body>
+</html>

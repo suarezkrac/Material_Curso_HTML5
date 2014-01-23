@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style type="text/css">
+			canvas{
+				width: 600px;
+				height: 400px;
+				border: 1px solid black;
+				box-shadow: 10px 10px 10px gray;
+			}
+
+		</style>
+	</head>
+	<body>
+		<canvas id="miCanvas_2" width="600" height="300"></canvas>
+
+		<script type="text/javascript">
+		window.requestAnimFrame =(function(callback){
+			return window.requestAnimationFrame || 
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame ||
+			window.oRequestAnimationFrame ||
+			window.msRequestAnimationFrame ||
+			function (callback){
+				window.setTimeout (callback, 1000/6);
+			};
+		})();
+
+		function animacion(lastTime, mirectangulo){
+			//Seleccionar Canvas
+			var canvas2 = document.getElementById("miCanvas_2");
+			var contexto2 = canvas2.getContext("2d");
+
+			//Variables, Updates, Refresh
+			var date = new Date();
+			var time = date.getTime();
+			var timeDiff = time - lastTime;
+			var linearSpeed = 100;
+			var linearDistEachFrame = linearSpeed * timeDiff /1000;
+			var currentX = mirectangulo.x;
+
+			if(currentX<canvas2.width - mirectangulo.width- mirectangulo.borderWidth/2){
+				var newX = currentX+linearDistEachFrame;
+				mirectangulo.x = newX;
+			}
+			lastTime = time;
+
+			//Limpiar Escena
+			contexto2.clearRect(0,0,canvas2.width, canvas2.height);
+
+			//Render Escena
+
+			contexto2.beginPath();
+
+			contexto2.rect(mirectangulo.x, mirectangulo.y, mirectangulo.width, mirectangulo.height);
+			contexto2.fillStyle = "blue";
+			contexto2.fill();
+			contexto2.lineWidth = mirectangulo.borderWidth;
+			contexto2.strokeStyle ="black";
+			contexto2.stroke();
+
+			//Request Frame Animacion
+			requestAnimFrame(function(){
+				animacion(lastTime, mirectangulo);
+			});
+
+		}
+		
+		window.onload = function (){
+			var mirectangulo = {
+				x: 0,
+				y: 50,
+				width: 100,
+				height: 50,
+				borderWidth:5
+			};
+			var date = new Date();
+			var time = date.getTime();
+
+			animacion(time, mirectangulo);
+			/*var canvas = document.getElementById("miCanvas");
+			var contexto = canvas.getContext("2d");
+			
+			var ancho = 300; 
+			var alto = 150;
+
+			contexto.translate(canvas.width/2,canvas.height/2);
+			contexto.scale(1, 0.5);
+			contexto.rotate(Math.PI/4);
+
+			contexto.fillStyle="blue";
+			contexto.fillRect(-ancho/2, -alto/2,ancho,alto);*/
+
+			
+
+		}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<style type="text/css">
+		#box, #box_2, #box_3, {
+			width: 50%;
+			height: 200px;
+			background-color: red;
+		}
+		#box_2{ background-color: blue;}
+		#box_3{background-color: gray; height:500px;}
+		p{color: white; font-size: 20px;
+			font-weight: bold; text-align: center;}
+		.convertirEstilo{
+			font-style: italic;
+			color: white;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="box">
+		<p>Giovanny Suarez</p>
+		<p>Ingeniero Multimedia</p>
+		<p class='job'>Cymetria Group S.A</P>
+	</div>
+	<div id="box_2">
+		<p>Experiencia Laboral</p>
+		<table>
+			<tr>
+				<td>Año</td>
+				<td>Ciudad</td>
+				<td>Empresa</td>
+			</tr>
+			<tr>
+				<td>2012</td>
+				<td>Bogota</td>
+				<td>Cymetria Group</td>
+			</tr>
+			<tr>
+				<td>2010</td>
+				<td>Bogota</td>
+				<td>Sepa Publicidad</td>
+			</tr>
+		</table>
+	</div>
+	<ul>
+	<div id="box_3">
+		<p class='contador'>El numero de paises listados son:</p>
+		
+			<li><a href="argentina.pdf">Argentina</a></li>
+			<li><a href="venezuela.html">Venezuela</a></li>
+			<li>Colombia
+				<ul>
+					<li>Bogota</li>
+					<li>Cali</li>
+					<li>Medellin</li>
+				</ul>
+			</li>
+			<li><a href="peru.pdf">Peru</a></li>
+			<li><a href="ecuador.html">Ecuador</a></li>
+		
+	</div>
+</ul>
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$('#box').click(function(){
+				$('#box').hide();
+
+		});
+
+		$('#box_2').click(function(){
+				$('#box').show();
+''
+		});
+
+		$('p.job').css('background-color', 'yellow');
+
+		$('p:eq(1)').css('background-color', 'gray');
+
+		$('tr:eq(0)').css('background-color', 'gray');
+		$('tr:eq(1)').css('background-color', 'white');
+		$('tr:eq(2)').css('background-color', 'red');
+
+		var count = $('div#box_3 li:not(ul>li)').size();
+		$('p.contador').text('El numero de paises listados son:'+count);
+
+		$("[href$='.pdf']").css('background-color', 'white');
+
+		$('ul>li').addClass('convertirEstilo')
+
+
+	});
+
+
+
+
+</script>
+
+</body>
+
+</html>

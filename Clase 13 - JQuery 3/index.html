@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<style type="text/css">
+	#box_1, #box_3, #box_4{
+		width: 300px;
+		height: 150px;
+		background-color: red;
+	}
+	#box_2{
+		width: 300px;
+		height: 150px;
+		border: 1px solid black;
+	}
+	
+	</style>
+</head>
+<body>
+<h1>MouseOver, MouseOut y Hover en Jquery</h1>
+<div id="box_1"></div>
+<h1>MouseMove en Jquery</h1>
+<div id="box_2">
+	<p id="x"></p>
+	<p id="y"></p>
+</div>
+<h1>MouseDown y MouseUp en Jquery</h1>
+<div id="box_3"></div>
+<h1>Click y Doble Click en Jquery</h1>
+<div id="box_4"></div>
+<h1>Focus y Blur en Jquery</h1>
+<input id="input_nombre" value="Digite su nombre"></input>
+	
+
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		/*$('#box_1').mouseover(function(){
+			$(this).css('background-color','blue')
+		})
+
+		$('#box_1').mouseout(function(){
+			$(this).css('background-color','red')
+		})*/
+
+		$('#box_1').hover(function(){$(this).css('background-color','blue')},function(){$(this).css('background-color','red')})
+
+		$('#box_2').mousemove(function(event){
+			$('#x').text('Coordenada X ='+event.clientX);
+			$('#y').text('Coordenada Y ='+event.clientY);
+		});
+
+		$('#box_3').mousedown(function(event){
+			$(this).css('background-color','blue')
+		});
+		$('#box_3').mouseup(function(event){
+			$(this).css('background-color','red')
+		});
+
+		/*$('#box_4').click(function(event){
+			alert("Has hecho click en el div")
+		});*/
+
+		$('#box_4').dblclick(function(event){
+			alert("Has hecho doble click en el div")
+		});
+
+		$('#input_nombre').focus(function(){
+			$(this).val(" ");
+		});
+		
+		$('#input_nombre').blur(function(){
+			var x=$(this).val();
+			if(x==" "){
+				$(this).val("Digite su nombre");
+			}
+		});
+	});
+
+	
+
+</script>
+
+</body>
+
+</html>

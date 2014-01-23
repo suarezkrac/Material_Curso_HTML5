@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<style type="text/css">
+		a{
+			text-decoration: none;
+			color: black;
+		}
+		a:hover{
+			text-decoration: none;
+			color: black;
+		}
+		.nuevaClase{
+			font-size: 20px;
+			text-decoration: underline;
+			font-style: italic;
+		}
+
+	</style>
+</head>
+<body>
+	<h1>Selectores en JQuery</h1>
+	<div id="box_1" ></div>
+	<div class="box_2"></div>
+	<ul>
+		<li><a href="#">Item 1</a></li>
+		<li><a href="#">Item 1</a></li>
+		<li><a href=".png">Item 1</a></li>
+		<li><a href=".jpg">Item 1</a></li>
+		<li><a href="#">Item 1</a></li>
+	</ul>
+	<input type="button" id="boton_1" value="Seleccion por ID">
+	<input type="button" id="boton_2"value="Seleccion por Clase">
+	<input type="button" id="boton_3"value="Seleccion por Etiqueta">
+	<input type="button" id="boton_4"value="Seleccion por Atributo">
+	<br>
+	<h1>Adicionar y remover Atributos en JQuery</h1>
+
+	<table id="tablaNumeros">
+		<tr>
+			<td>1</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>4</td>
+		</tr>
+
+	</table>
+
+
+	<input type="button" id="boton_tabla_1" value="Leer Atributo">
+	<input type="button" id="boton_tabla_2" value="Adicionar Atributo">
+	<input type="button" id="boton_tabla_3" value="Remover Atributo">
+
+	<br>
+	<h1>Adicionar y remover Clases en JQuery</h1>
+	<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+	<input type="button" id="boton_clase_1" value="Adicionar Clase">
+	<input type="button" id="boton_clase_2" value="Remover Clase">
+
+	<h1>Adicionar HTML en JQuery</h1>
+	<div id="nuevoHTML"></div>
+	<input type="button" id="boton_html_1" value="Adicionar HTML">
+
+	<h1>Adicionar Cadenas y HTML Adicional en JQuery</h1>
+	<p id="cadena">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+	<input type="button" id="boton_cadena_1" value="Adicionar Cadena Comienzo">
+	<input type="button" id="boton_cadena_2" value="Adicionar Cadena Final">
+	<input type="button" id="boton_cadena_3" value="Reemplazar Cadena">
+
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+			$('#boton_1').click(function(){
+				/*	$("#box_1").css('width','500px');
+								.css('height','500px');
+								.css('background-color','red');
+*/
+					$("#box_1").css({'display':'inline-block','width':'300px', 'height':'300px','background-color':'red'});
+/*
+					var ObjetoCSS = {'width':'500px', 'height':'500px','background-color':'red'};
+					$("#box_1").css(ObjetoCSS);
+*/
+			});
+
+			$('#boton_2').click(function(){
+			
+					$(".box_2").css({'display':'inline-block','width':'300px', 'height':'300px','background-color':'blue'});
+
+			});
+			$('#boton_3').click(function(){
+			
+					$("h1").css({'font-size':'24px','color':'red'});
+
+			});
+			$('#boton_4').click(function(){
+			
+					$("[href$='.png']").css({'text-decoration':'none','color':'red'});
+
+			});
+			$('li a').click(function(){
+				$(this).css({'color':'yellow', 'font-size':'18px'})
+
+			})
+
+			$('#boton_tabla_1').click(function(){
+				var x = $('#tablaNumeros').attr('border');
+				alert(x);
+			});
+
+			$('#boton_tabla_2').click(function(){
+				$('#tablaNumeros').attr('border','2');
+			});
+
+			$('#boton_tabla_3').click(function(){
+				$('#tablaNumeros').removeAttr('border');
+			});
+
+			$('#boton_clase_1').click(function(){
+				$('p').addClass('nuevaClase');
+			})
+
+			$('#boton_clase_2').click(function(){
+				$('p').removeClass('nuevaClase');
+			})
+
+			$('#boton_html_1').click(function(){
+				$('#nuevoHTML').html('<ul><li>Item1</li><li>Item2</li><li>Item3</li></ul>')
+			})
+
+			$('#boton_cadena_1').click(function(){
+				$('#cadena').prepend('NUEVA CADENA__');
+				/*$('#cadena').before('NUEVA CADENA__');*/
+
+			});
+			$('#boton_cadena_2').click(function(){
+				$('#cadena').append('NUEVA CADENA__');
+				/*$('#cadena').after('NUEVA CADENA__');*/
+
+			});
+			$('#boton_cadena_3').click(function(){
+				$('#cadena').text('NUEVA CADENA__');
+				/*$('#cadena').after('NUEVA CADENA__');*/
+
+			});
+
+	});
+
+	
+
+</script>
+
+</body>
+
+</html>

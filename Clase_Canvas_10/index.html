@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #buttons {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+      #buttons > input {
+        padding: 10px;
+      }
+      canvas {
+        border: 1px solid #9C9898;
+      }
+    </style>
+    <script src="kinetic-v3.10.4.min.js"></script>
+    <script>
+      function transitionAll(boxes) {
+        for(var n = 0; n < boxes.length; n++) {
+          var box = boxes[n];
+
+          box.text.transitionTo({
+            x: 420,
+            duration: 2,
+            easing: box.easing
+          });
+        }
+      }
+      function reset(layer, boxes) {
+        for(var n = 0; n < boxes.length; n++) {
+          boxes[n].text.setX(10);
+        }
+
+        layer.draw();
+      }
+
+      window.onload = function() {
+        var stage = new Kinetic.Stage({
+          container: "container",
+          width: 578,
+          height: 480
+        });
+        var layer = new Kinetic.Layer();
+
+        var boxes = [{
+          color: 'red',
+          easing: 'linear'
+        }, {
+          color: 'orange',
+          easing: 'ease-in'
+        }, {
+          color: 'yellow',
+          easing: 'ease-out'
+        }, {
+          color: 'green',
+          easing: 'ease-in-out'
+        }, {
+          // light blue
+          color: '#00a6eb',
+          easing: 'back-ease-in'
+        }, {
+          color: 'purple',
+          easing: 'back-ease-out'
+        }, {
+          color: 'red',
+          easing: 'back-ease-in-out'
+        }, {
+          color: 'orange',
+          easing: 'elastic-ease-in'
+        }, {
+          color: 'yellow',
+          easing: 'elastic-ease-out'
+        }, {
+          color: 'green',
+          easing: 'elastic-ease-in-out'
+        }, {
+          // light blue
+          color: '#00a6eb',
+          easing: 'bounce-ease-out'
+        }, {
+          color: 'purple',
+          easing: 'bounce-ease-in'
+        }, {
+          color: 'red',
+          easing: 'bounce-ease-in-out'
+        }, {
+          color: 'orange',
+          easing: 'strong-ease-in'
+        }, {
+          color: 'yellow',
+          easing: 'strong-ease-out'
+        }, {
+          color: 'green',
+          easing: 'strong-ease-in-out'
+        }];
+
+        for(var n = 0; n < boxes.length; n++) {
+          var num = n + 1;
+          var text = new Kinetic.Text({
+            x: 10,
+            y: 60 + (n * 400 / boxes.length),
+            fill: boxes[n].color,
+            stroke: 'black',
+            strokeWidth: 2,
+            padding: 4,
+            text: num + ') ' + boxes[n].easing,
+            fontSize: 12,
+            fontFamily: 'Calibri',
+            textFill: 'black',
+            cornerRadius: 3
+          });
+
+          layer.add(text);
+
+          // add rect to boxes array as well
+          boxes[n].text = text;
+        }
+
+        stage.add(layer);
+
+        document.getElementById('go').addEventListener('click', function() {
+          transitionAll(boxes);
+        }, false);
+
+        document.getElementById('reset').addEventListener('click', function() {
+          reset(layer, boxes);
+        }, false);
+      };
+
+    </script>
+  </head>
+  <body>
+    <div id="container"></div>
+    <div id="buttons">
+      <input type="button" id="reset" value="Reset">
+      <input type="button" id="go" value="Go!">
+    </div>
+  </body>
+</html>

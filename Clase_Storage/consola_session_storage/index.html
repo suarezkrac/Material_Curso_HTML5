@@ -1,0 +1,82 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+<style type="text/css">
+	iframe{
+		width: 50%;
+		height: 500px;
+		background-color: lightblue;
+		float: right;
+	}
+
+</style>
+</head>
+
+<body>
+
+	<iframe src="handling.html"></iframe>
+	<h1>CONSOLA Almacenamiento SessionStorage</h1>
+
+	<b>Item Nombre:</b><input type="text" id="itemNombre" size="15">
+	<br>
+	<b>Item Valor:</b><input type="text" id="itemValor" size="15">
+	<br>
+
+	<input type="button" value="Guardar item" id="guardar"> &nbsp;
+	<input type="button" value="Borrar items" id="borrar"> &nbsp;
+	<input type="button" value="Limpiar items" id="limpiar"> &nbsp;
+	<br>
+	<br>
+	<div id ="resultados"></div>
+	<script type="text/javascript">
+
+	function guardarItem () {
+		var itemNombre = document.getElementById("itemNombre").value;
+		var itemValor = document.getElementById("itemValor").value;
+
+		window.sessionStorage.setItem(itemNombre,itemValor);
+		//window.localStorage[itemNombre] = itemValor;
+
+		mostrarItem ();
+	}
+
+	function borrarItem () {
+		var itemName = document.getElementById("itemNombre").value;
+		window.sessionStorage.removeItem(itemName);
+		mostrarItem ();
+		// body...
+	}
+
+	function limpiarItem () {
+		// body...
+		window.sessionStorage.clear();
+		mostrarItem ();
+	}
+
+	function mostrarItem () {
+		var count = window.sessionStorage.length;
+		var resultado = "Valores del sessionStorage:<br><ul>";
+
+		for (var i = 0; i < count; i++) {
+			var key = window.sessionStorage.key(i);
+			var val = window.sessionStorage.getItem(key);
+			resultado += "<li>"+key+" = "+val+"</li>";
+		}
+		resultado+="</ul>";
+		document.getElementById("resultados").innerHTML = resultado;
+	}
+
+	function onLoad () {
+		// body...
+		document.getElementById("guardar").addEventListener("click",guardarItem,true);
+		document.getElementById("borrar").addEventListener("click",borrarItem,true);
+		document.getElementById("limpiar").addEventListener("click",limpiarItem,true);
+
+	}
+
+	window.addEventListener("load", onLoad, true);
+	</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+#box{
+	display:inline-block;
+	margin:20px auto;
+	width:40%;
+	height:300px;
+	background-color: red;
+	border-radius:20px;
+}
+#box_2{
+	display:inline-block;
+	margin:20px auto;
+	width:40%;
+	height:300px;
+	background-color: yellow;
+	border-radius:20px;
+}
+@media screen and (max-width:600px ){
+	#box{
+		background-color: blue;
+	}
+	#box, #box_2{
+		width:80%;
+		display:block;
+	}	
+
+}
+@media screen and (max-width:480px ){
+	#box{
+		height:600px;
+		background-color: green;
+	}
+	#box_2{
+		display: none;
+	}	
+
+}
+
+
+
+
+
+

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style type="text/css">
+			#miCanvas{
+				width: 600px;
+				height: 200px;
+				border: 1px solid black;
+				box-shadow: 10px 10px 10px gray;
+
+				
+
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="miCanvas" width="600" height="200"></canvas>
+		<script type="text/javascript">
+		window.onload = function (){
+			var canvas = document.getElementById("miCanvas");
+			var contexto = canvas.getContext("2d");
+
+			//LINEA
+				/*contexto.beginPath();
+				contexto.moveTo(50,50);
+				contexto.lineTo(140,50);
+				contexto.lineWidth=10;
+				contexto.strokeStyle="#0000FF";
+				contexto.lineCap="butt";
+				contexto.stroke();
+
+				contexto.beginPath();
+				contexto.moveTo(50,80);
+				contexto.lineTo(140,80);
+				contexto.lineWidth=10;
+				contexto.strokeStyle="#FF0000";
+				contexto.lineCap="round";
+				contexto.stroke();
+
+				contexto.beginPath();
+				contexto.moveTo(50,100);
+				contexto.lineTo(140,100);
+				contexto.lineWidth=10;
+				contexto.strokeStyle="#00FF00";
+				contexto.lineCap="square";
+				contexto.stroke();*/
+
+			//Curvas
+				/*var x= 100;
+				var y= 100;
+				var radio = 70;
+				var AnguloInicio = 1 * Math.PI;
+				var AnguloFinal = 2 * Math.PI;
+				var contador = false;
+
+				contexto.beginPath();
+				
+				//Metodo Arc
+				//contexto.arc(x, y, radio, AnguloInicio, AnguloFinal, contador);
+				
+				//Bezier 
+				//contexto.moveTo(100,120);
+				//contexto.bezierCurveTo(110,20,200,20,200,120);
+
+				//Curvas Cuadraticas
+				contexto.moveTo(100,100);
+				contexto.quadraticCurveTo(120,0,200,100)
+
+
+				contexto.lineWidth= 10;
+				contexto.strokeStyle= "red";
+				contexto.stroke();*/
+
+			//Paths 
+				contexto.beginPath();
+				contexto.moveTo(100,20);
+		        contexto.lineTo(200, 160);
+		        contexto.quadraticCurveTo(230, 200, 250, 120);
+		        contexto.bezierCurveTo(290, -40, 300, 200, 400, 150);
+		        contexto.lineTo(500, 90);
+				contexto.lineWidth=5;
+
+				contexto.stroke();
+
+			//Line Join
+			/*	contexto.beginPath();
+				contexto.moveTo(99,150);
+				contexto.lineTo(149,50);
+				contexto.lineTo(199,150);
+				contexto.lineJoin="round";
+				contexto.lineWidth=25;
+				contexto.stroke();	*/
+
+			//Border Redondeados por Arco	
+			/*	 var rectWidth = 200;
+		        var rectHeight = 100;
+		        var rectX = 189;
+		        var rectY = 50;
+		        var cornerRadius = 50;
+
+				contexto.beginPath();
+	        	contexto.moveTo(rectX, rectY);
+	        	contexto.lineTo(rectX + rectWidth - cornerRadius, rectY);
+	        	contexto.arcTo(rectX + rectWidth, rectY, rectX + rectWidth, rectY + cornerRadius, cornerRadius);
+	        	contexto.lineTo(rectX + rectWidth, rectY + rectHeight);
+	        	contexto.lineWidth = 5;
+	        	contexto.stroke();
+			*/
+
+
+		}
+		</script>
+	</body>
+</html>

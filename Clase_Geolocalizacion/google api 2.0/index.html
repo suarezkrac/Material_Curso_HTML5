@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style type="text/css">
+		#mapa{
+			position: absolute;
+			top: 90px;
+			left: 150px;
+			width: 512px;
+			height: 512px;
+			border: 2px solid black;
+			box-shadow: 9px 9px 10px gray;
+			overflow: hidden;
+		}
+	
+		</style>
+	</head>
+	<body>
+		<b id="latitud"></b>
+		<b id="longitud"></b>
+		<div id="mapa" onclick="ubicar();">
+			<img src="gps.jpg" id="mapa_img" width="512" height="512" >
+		</div>
+	
+		<script type="text/javascript">
+			function ubicar(){
+				if(navigator.geolocation){
+					navigator.geolocation.getCurrentPosition(VerMapa);
+			}else{
+				alert("El navegador no soporte Geolocalizacion por HTML5")
+			}
+		}
+
+			function VerMapa(position){
+				document.getElementById("latitud").innerHTML = position.coords.latitude;
+				document.getElementById("longitud").innerHTML = position.coords.longitude;
+				document.getElementById("mapa_img").src="http://maps.google.com/maps/api/staticmap?center="+position.coords.latitude+","+position.coords.longitude+"&zoom=15&size=512x512&sensor=false&maptype=roadmap";
+
+			}
+		
+		</script>
+	</body>
+</html>
