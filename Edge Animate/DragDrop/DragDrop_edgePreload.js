@@ -43,7 +43,7 @@ if(document.addEventListener ){
    window.attachEvent("onload", onDocLoaded );
 }
 
-   requiresSVG=true;
+   requiresSVG=false;
 
    doDelayLoad=false;
    htFallbacks={
@@ -52,14 +52,14 @@ if(document.addEventListener ){
    aLoader = [
       { load: "edge_includes/jquery-2.0.3.min.js"},
       { load: "edge_includes/edge.3.0.0.min.js"},
-      { load: "index_edge.js"},
-      { load: "index_edgeActions.js"}];
+      { load: "DragDrop_edge.js"},
+      { load: "DragDrop_edgeActions.js"}];
 
 if (AdobeEdge.bootstrapLoading) { signaledLoading = true; AdobeEdge.loadResources=doLoadResources; AdobeEdge.playWhenReady=playWhenReady; }
 
 loadResources(aLoader, doDelayLoad);
 
-var plSTF="none",ctrPlS="none",minPlW="0",maxPlW=undefined,plWidth="600px",plHeight="400px";
+var plSTF="none",ctrPlS="none",minPlW="0",maxPlW=undefined,plWidth="1000px",plHeight="500px";
 
 preContent={dom:[
 ]}
@@ -69,4 +69,4 @@ dlContent={dom: [
 ]}
 ;//simpleContent
 
-})( "EDGE-13181186");
+})( "EDGE-34189304");
